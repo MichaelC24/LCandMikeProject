@@ -27,7 +27,17 @@ namespace LCandMikeProject.Controllers
         {
             return await _context.Employee.ToListAsync();
         }
-
+        [HttpGet("{username}/{password}")]
+        public async Task<ActionResult<Employee>> CheckPassword(string username, string password) {
+            var lm = await
+                (from x in _context.Employee where x.Email == username && x.password == password 
+                select x).SingleAsync();
+            if (lm == null) {
+                return NotFound();
+                
+            }
+            return lm;
+        }
         // GET: api/Employees/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)

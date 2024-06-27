@@ -20,7 +20,7 @@ namespace LCandMikeProject.Controllers
         {
             _context = context;
         }
-        [HttpGet("{status}")] // localhost:5000/NEW
+        [HttpGet("status/{status}")] // localhost:5000/NEW
         public async Task<ActionResult<IEnumerable<Order>>> GetStatus(string status) //takes new
         {
              var orders = from o in _context.Orders
@@ -92,6 +92,13 @@ namespace LCandMikeProject.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+        }
+        [HttpPut("shipped/{id}")]
+        public async Task<IActionResult> PutOrderStatusShipped(int id, Order Order) {
+           
+            Order.Status = "shipped";
+           return await PutOrder(id, Order);
+           
         }
 
         // DELETE: api/Orders/5
