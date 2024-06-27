@@ -15,6 +15,7 @@ namespace LCandMikeProject.Data
         }
 
         public DbSet<Customer> Customer { get; set; } = default!;
+        public DbSet<LCandMikeProject.Model.Item> Item { get; set; } = default!;
         public DbSet<Order> Order { get; set; } = default!;
     }
 }
