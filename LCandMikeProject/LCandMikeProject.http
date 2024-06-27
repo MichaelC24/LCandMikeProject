@@ -1,0 +1,6 @@
+@LCandMikeProject_HostAddress = http://localhost:5064
+
+GET {{LCandMikeProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
