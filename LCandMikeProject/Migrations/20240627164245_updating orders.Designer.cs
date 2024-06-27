@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LCandMikeProject.Migrations
 {
     [DbContext(typeof(LCmikeContext))]
-    [Migration("20240627162622_Employee")]
-    partial class Employee
+    [Migration("20240627164245_updating orders")]
+    partial class updatingorders
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,7 +134,7 @@ namespace LCandMikeProject.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("LCandMikeProject.Model.OrderLine", b =>

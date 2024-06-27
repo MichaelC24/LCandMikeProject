@@ -23,7 +23,7 @@ namespace LCandMikeProject.Controllers
         [HttpGet("{status}")] // localhost:5000/NEW
         public async Task<ActionResult<IEnumerable<Order>>> GetStatus(string status) //takes new
         {
-             var orders = from o in _context.Order
+             var orders = from o in _context.Orders
                        where o.Status == status // new goes in status
                        select o;
 
@@ -35,14 +35,14 @@ namespace LCandMikeProject.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrder()
         {
-            return await _context.Order.ToListAsync();
+            return await _context.Orders.ToListAsync();
         }
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
 
             if (order == null)
             {
@@ -88,7 +88,7 @@ namespace LCandMikeProject.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
-            _context.Order.Add(order);
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetOrder", new { id = order.Id }, order);
@@ -98,13 +98,13 @@ namespace LCandMikeProject.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound();
             }
 
-            _context.Order.Remove(order);
+            _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -112,7 +112,7 @@ namespace LCandMikeProject.Controllers
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }
