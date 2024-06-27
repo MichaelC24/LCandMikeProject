@@ -20,7 +20,7 @@ namespace LCandMikeProject.Controllers
         {
             _context = context;
         }
-        [HttpGet("{status}")] // localhost:5000/NEW
+        [HttpGet("s{status}")] // localhost:5000/NEW
         public async Task<ActionResult<IEnumerable<Order>>> GetStatus(string status) //takes new
         {
              var orders = from o in _context.Order
