@@ -18,5 +18,6 @@ namespace LCandMikeProject.Data
         public DbSet<LCandMikeProject.Model.Item> Item { get; set; } = default!;
         public DbSet<Order> Order { get; set; } = default!;
         public DbSet<LCandMikeProject.Model.OrderLine> OrderLine { get; set; } = default!;
+        public DbSet<LCandMikeProject.Model.Employee> Employee { get; set; } = default!;
     }
 }
