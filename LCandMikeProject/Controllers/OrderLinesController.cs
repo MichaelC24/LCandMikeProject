@@ -20,6 +20,25 @@ namespace LCandMikeProject.Controllers
         {
             _context = context;
         }
+        public async Task<ActionResult<OrderLine>> Total(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order.Total = (from o in _context.OrderLine
+                       join i in _context.Item
+                        on o.ItemId equals i.Id
+                        where o.Id == id
+                       select (o.Quantity * i.Price)).Sum();
+
+            await _context.SaveChangesAsync();
+            return Ok();
+            
+        }
 
         // GET: api/OrderLines
         [HttpGet]
@@ -57,6 +76,7 @@ namespace LCandMikeProject.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+                await Total(orderLine.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -80,6 +100,7 @@ namespace LCandMikeProject.Controllers
         {
             _context.OrderLine.Add(orderLine);
             await _context.SaveChangesAsync();
+            await Total(orderLine.Id);
 
             return CreatedAtAction("GetOrderLine", new { id = orderLine.Id }, orderLine);
         }
@@ -96,6 +117,7 @@ namespace LCandMikeProject.Controllers
 
             _context.OrderLine.Remove(orderLine);
             await _context.SaveChangesAsync();
+            await Total(orderLine.Id);
 
             return NoContent();
         }
