@@ -15,5 +15,6 @@ namespace LCandMikeProject.Data
         }
 
         public DbSet<Customer> Customer { get; set; } = default!;
+        public DbSet<Order> Order { get; set; } = default!;
     }
 }
