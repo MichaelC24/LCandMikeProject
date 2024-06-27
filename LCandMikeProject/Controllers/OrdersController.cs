@@ -20,12 +20,13 @@ namespace LCandMikeProject.Controllers
         {
             _context = context;
         }
-        [HttpGet("{status}")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetStatus(string status)
+        [HttpGet("{status}")] // localhost:5000/NEW
+        public async Task<ActionResult<IEnumerable<Order>>> GetStatus(string status) //takes new
         {
              var orders = from o in _context.Order
-                       where o.Status == status
+                       where o.Status == status // new goes in status
                        select o;
+
             return await orders.ToListAsync();
             
         }
